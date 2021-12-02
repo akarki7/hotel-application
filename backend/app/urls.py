@@ -10,10 +10,11 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     path("api/health", status, name="health-view"),
-    path("api/v1/schema", SpectacularAPIView.as_view(), name="schema"),
+    path("api/schema", SpectacularAPIView.as_view(), name="schema"),
     path(
-        "api/v1/schema/swagger-ui",
+        "api/schema/swagger-ui",
         SpectacularSwaggerView.as_view(url_name="schema"),
         name="swagger-ui",
     ),
+    path('api/', include(('users.routers', 'core'), namespace='core-api'))
 ]
