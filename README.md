@@ -1,11 +1,12 @@
-# Limehome Backend
+# Limehome Coding Challenge
 
-Backend for limehome coding challenge.
+Solution for limehome coding challenge.
 
 ### Architecture Notes
 ------------------
 * Backend is written in Python and uses Django as the server
 * For Database the system uses Postgresql for both local testing and production
+* Frontend is written using REACT JS
 * The frontend communicates with the backend using REST architecture.
 
 ### Requirements
@@ -15,7 +16,7 @@ Backend for limehome coding challenge.
 * docker-compose
 
 
-### How to run 
+### How to run backend
 --------------------------
 
 
