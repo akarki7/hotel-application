@@ -104,7 +104,6 @@ WATCHMAN_CHECKS = ("watchman.checks.caches", "watchman.checks.databases")
 SPECTACULAR_SETTINGS = {
     "TITLE": "limehomebackend",
     "VERSION": "1.0.0",
-    "SERVERS": [{"url": f"/{ENV}"}],
     "SWAGGER_UI_SETTINGS": {"deepLinking": True, "filter": True},
 }
 
