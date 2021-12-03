@@ -1,28 +1,22 @@
-import React, { Component } from "react";
+import React from "react";
+import {useDispatch} from "react-redux";
+import {useHistory} from "react-router";
+import authSlice from "../store/slices/auth";
 
-export default class Product extends Component {
-    render() {
-        return (
-            <form>
-                <h3>Product</h3>
+const Product = () => {
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const handleLogout = () => {
+        dispatch(authSlice.actions.setLogout());
+        history.push("/sign-in");
+      };
 
-                <div className="form-group">
-                    <label>Username</label>
-                    <input type="text" className="form-control" placeholder="Username" />
-                </div>
-
-                <div className="form-group">
-                    <label>Email address</label>
-                    <input type="email" className="form-control" placeholder="Enter email" />
-                </div>
-
-                <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" />
-                </div>
-
-                <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
-            </form>
-        );
-    }
+    return (
+        <form>
+            <button type="submit" className="btn btn-primary btn-block" onClick={handleLogout}>Log Out</button>
+        </form>
+    );
 }
+
+
+export default Product;
