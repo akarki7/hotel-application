@@ -4,7 +4,7 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import store, { persistor } from "./store";
 import Login from "./components/login.component";
-import SignUp from "./components/signup.component";
+import Register from "./components/signup.component";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import ProtectedRoute from "./routes/ProtectedRoute";
@@ -37,7 +37,7 @@ function App() {
                 <Switch>
                   <Route exact path='/' component={Login} />
                   <Route path="/sign-in" component={Login} />
-                  <Route path="/sign-up" component={SignUp} />
+                  <Route path="/sign-up" component={Register} />
                   <ProtectedRoute path="/product" component={Product} />
                 </Switch>
               </div>
