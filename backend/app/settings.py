@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "users",
     "corsheaders",
+    "properties",
 ]
 
 MIDDLEWARE = [
@@ -98,7 +99,6 @@ REST_FRAMEWORK = {
         # "rest_framework.authentication.TokenAuthentication",
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-    "DEFAULT_PAGINATION_CLASS": "app.pagination.FinnPagination",
 }
 
 WATCHMAN_CHECKS = ("watchman.checks.caches", "watchman.checks.databases")
