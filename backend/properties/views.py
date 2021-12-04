@@ -8,9 +8,11 @@ from rest_framework.mixins import (
 )
 from rest_framework.viewsets import GenericViewSet
 
-from limehomeproject.backend.properties.models import Property
+from .models import Property
 
 from .serializers import PropertySerializer
+
+from .filters import PropertyFilter
 
 
 class PropertyViewSet(CreateModelMixin,
@@ -18,3 +20,4 @@ class PropertyViewSet(CreateModelMixin,
     permission_classes = [IsAuthenticated]
     serializer_class = PropertySerializer
     queryset = Property.objects.all()
+    filterset_class = PropertyFilter

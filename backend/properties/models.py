@@ -3,6 +3,7 @@ from users.models import User
 
 class Property(models.Model):
 
+    property_id=models.CharField(max_length=32,unique=True)
     name=models.CharField(max_length=200,null=False)
     city=models.CharField(max_length=200,null=False)
     country=models.CharField(max_length=200,null=False)
