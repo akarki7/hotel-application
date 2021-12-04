@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'is_active']
+        fields = ['email', 'is_active']
         read_only_field = ['is_active']
 
 
@@ -31,12 +31,9 @@ class LoginSerializer(TokenObtainPairSerializer):
 
 
 class RegisterSerializer(UserSerializer):
-    password = serializers.CharField(max_length=128, min_length=8, write_only=True, required=True)
-    email = serializers.EmailField(required=True, write_only=True, max_length=128)
-
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password', 'is_active']
+        fields = ['email', 'password']
 
     def create(self, validated_data):
         try:
