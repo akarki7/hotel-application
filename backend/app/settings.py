@@ -22,6 +22,8 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "users",
     "corsheaders",
+    "properties",
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -98,7 +100,7 @@ REST_FRAMEWORK = {
         # "rest_framework.authentication.TokenAuthentication",
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-    "DEFAULT_PAGINATION_CLASS": "app.pagination.FinnPagination",
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
 }
 
 WATCHMAN_CHECKS = ("watchman.checks.caches", "watchman.checks.databases")

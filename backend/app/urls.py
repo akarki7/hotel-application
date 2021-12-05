@@ -6,7 +6,7 @@ from drf_spectacular.views import (
     SpectacularSwaggerView,
 )
 from watchman.views import status
-from rest_framework.authtoken.views import obtain_auth_token
+from properties import urls as property_urls
 
 urlpatterns = [
     path("api/health", status, name="health-view"),
@@ -16,5 +16,6 @@ urlpatterns = [
         SpectacularSwaggerView.as_view(url_name="schema"),
         name="swagger-ui",
     ),
+    path("api/", include(property_urls)),
     path('api/', include(('users.routers', 'core'), namespace='core-api'))
 ]
