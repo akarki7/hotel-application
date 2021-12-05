@@ -1,7 +1,7 @@
 import React from 'react';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import store, { persistor } from "./store";
 import Login from "./components/login.component";
 import Register from "./components/signup.component";
@@ -9,40 +9,27 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Product from './components/product';
+import Navigation from './components/Navigation';
 
 function App() {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={null}>
-        <Router>
-          <div className="App">
-            <nav className="navbar navbar-expand-lg navbar-light fixed-top">
-              <div className="container">
-                <Link className="navbar-brand" to={"/"}>Limehome Coding Challenge</Link>
-                <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-                  <ul className="navbar-nav ml-auto">
-                    <li className="nav-item">
-                      <Link className="nav-link" to={"/sign-in"}>Login</Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link className="nav-link" to={"/sign-up"}>Sign up</Link>
-                    </li>
-                  </ul>
+        <div className="App">
+          <Router>
+            <Switch>
+              <ProtectedRoute path="/product" component={Product} />
+              <div className="auth-wrapper">
+                <div className="auth-inner">
+                  <Navigation />
+                  <Route exact path='/' component={Register} />
+                  <Route path="/register" component={Register} />
+                  <Route path="/login" component={Login} />
                 </div>
               </div>
-            </nav>
-
-            <div className="auth-wrapper">
-              <div className="auth-inner">
-                <Switch>
-                  <Route exact path='/' component={Login} />
-                  <Route path="/sign-in" component={Login} />
-                  <Route path="/sign-up" component={Register} />
-                  <ProtectedRoute path="/product" component={Product} />
-                </Switch>
-              </div>
-            </div>
-          </div></Router>
+            </Switch>
+          </Router>
+        </div>
       </PersistGate>
     </Provider>
   );
