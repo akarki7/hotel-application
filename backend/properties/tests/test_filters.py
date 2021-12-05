@@ -1,11 +1,8 @@
 from django.test.testcases import TestCase
 import pytest
-from datetime import date, datetime, timedelta
-from rest_framework.test import APIRequestFactory, APIClient
+from rest_framework.test import APIClient
 from users.models import User
 from properties.models import Property
-from properties.views import PropertyViewSet
-
 
 @pytest.mark.django_db
 class TestPropertyFilter(TestCase):
@@ -49,12 +46,12 @@ class TestPropertyFilter(TestCase):
         self.assertIsNotNone(token)
         self.client.credentials(HTTP_AUTHORIZATION="Bearer "+token)
 
-    def test_filter_product_id_yields_no_results(self):
+    def test_filter_property_id_yields_no_results(self):
         response= self.client.get(f"/api/properties/?property_id=99")
         assert response.status_code == 200
         assert len(response.data)==0
 
-    def test_filter_product_id_yields_one_result(self):
+    def test_filter_property_id_yields_one_result(self):
         response= self.client.get(f"/api/properties/?property_id=95")
         assert response.status_code == 200
         assert len(response.data)==1
