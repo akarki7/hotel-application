@@ -5,20 +5,21 @@ import "./css/product.css"
 import { Card, Row, Col, Container } from "react-bootstrap";
 import NavigationLoggedIn from './Navigation_logged_in';
 import {useSelector} from "react-redux";
+import store from '../store';
 
 const Product = () => {
     var userID;
+    var token;
 
     var fav_list={};
 
     const account = useSelector((state) => state.auth.account);
     if (account){
          userID= account.id;
+         token=store.getState().auth.token;
     }
-
-    var x=95
     
-    console.log(userID)
+    console.log(userID,token)
 
     const [propertyData, setPropertyData] = useState([]);
     useEffect(() => {
@@ -27,7 +28,7 @@ const Product = () => {
             const propertyData_received = await response.json()
             // call database endpoint using /properties/user_id
             //compare the properties.id from backend to properties.id in frontend and do something for the favourites icon
-
+            const response_database=await fetch(`${process.env.REACT_APP_API_URL}/properties/?user_id=${userID}`)
             setPropertyData(propertyData_received.payload)
         }
         fetchData()
