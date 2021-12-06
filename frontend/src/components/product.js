@@ -9,10 +9,14 @@ import {useSelector} from "react-redux";
 const Product = () => {
     var userID;
 
+    var fav_list={};
+
     const account = useSelector((state) => state.auth.account);
     if (account){
          userID= account.id;
     }
+
+    var x=95
     
     console.log(userID)
 
@@ -21,6 +25,9 @@ const Product = () => {
         const fetchData = async () => {
             const response = await fetch('https://api.limehome.com/properties/v1/public/properties')
             const propertyData_received = await response.json()
+            // call database endpoint using /properties/user_id
+            //compare the properties.id from backend to properties.id in frontend and do something for the favourites icon
+
             setPropertyData(propertyData_received.payload)
         }
         fetchData()
@@ -42,9 +49,6 @@ const Product = () => {
         const str2 = arr.join(" ");
         return str2;
     }
-
-
-
 
     return (
         <>
