@@ -13,25 +13,25 @@ import Navigation from './components/Navigation';
 
 function App() {
   return (
-    <Provider store={store}>
-      <PersistGate persistor={persistor} loading={null}>
-        <div className="App container-product">
-          <Router>
-            <Switch>
-              <ProtectedRoute path="/product" component={Product} />
-              <div className="auth-wrapper">
-                <div className="auth-inner">
-                  <Navigation />
-                  <Route exact path='/' component={Login} />
-                  <Route path="/register" component={Register} />
-                  <Route path="/login" component={Login} />
-                </div>
-              </div>
-            </Switch>
-          </Router>
-        </div>
-      </PersistGate>
-    </Provider>
+    <>
+      <Provider store={store}>
+        <PersistGate persistor={persistor} loading={null}>
+          <div className="App container-product">
+            <Router>
+              <Switch>
+                <ProtectedRoute path="/product" component={Product} />
+                <React.Fragment>
+                    <Navigation />
+                    <Route exact path='/' component={Login} />
+                    <Route path="/register" component={Register} />
+                    <Route path="/login" component={Login} />
+                  </React.Fragment>
+              </Switch>
+            </Router>
+          </div>
+        </PersistGate>
+      </Provider>
+    </>
   );
 }
 
