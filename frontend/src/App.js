@@ -15,14 +15,14 @@ function App() {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={null}>
-        <div className="App">
+        <div className="App container-product">
           <Router>
             <Switch>
               <ProtectedRoute path="/product" component={Product} />
               <div className="auth-wrapper">
                 <div className="auth-inner">
                   <Navigation />
-                  <Route exact path='/' component={Register} />
+                  <Route exact path='/' component={Login} />
                   <Route path="/register" component={Register} />
                   <Route path="/login" component={Login} />
                 </div>

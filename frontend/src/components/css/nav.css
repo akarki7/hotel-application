@@ -1,5 +1,5 @@
 .color-nav{
-    background-color: beige;
+    background-color:#f7f1e9;
 }
 
 .color-nav-link{
@@ -9,4 +9,8 @@
 
 .nav-right-align{
     margin-left: 700px;
+}
+
+.nav-right-align-2{
+    margin-left: 1000px;
 }

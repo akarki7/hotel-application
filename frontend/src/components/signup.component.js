@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "./css/form.css";
+import { Button } from "react-bootstrap";
 
 function Register() {
 
@@ -22,7 +24,7 @@ function Register() {
             })
             .catch((err) => {
                 console.log(err);
-
+                setLoading(false);
                 if (err.response.data.detail) {
                     setMessage(err.response.data.detail.toString());
                 }
@@ -49,16 +51,16 @@ function Register() {
     });
 
     return (
-        <form onSubmit={formik.handleSubmit}>
+        <form>
             <h3>Sign Up</h3>
 
-            <div className="form-group">
+            <div className="form-group inside-container">
                 <label>Email address</label>
                 <input id="email" type="email" className="form-control" placeholder="Enter email" value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur} />
                 {formik.errors.email ? <div>{formik.errors.email} </div> : null}
             </div>
 
-            <div className="form-group">
+            <div className="form-group inside-container">
                 <label>Password</label>
                 <input id="password" type="password" className="form-control" placeholder="Enter password" value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur} />
                 {formik.errors.password ? (
@@ -68,7 +70,9 @@ function Register() {
             <div hidden={false}>
                 {message}
             </div>
-            <button type="submit" className="btn btn-primary btn-block" disabled={loading}>Submit</button>
+            <div className="form-button">
+                <Button variant="primary" size="lg" className="button-color-logout" disabled={loading} onClick={formik.handleSubmit}>Submit</Button>
+            </div>
         </form>
     );
 }
