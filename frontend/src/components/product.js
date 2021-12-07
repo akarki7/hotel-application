@@ -122,14 +122,7 @@ const Product = () => {
                 console.log(err)
             });
     }
-
-    // function callbackTester(callback) {
-    //     console.log("callback called");
-    //     callback();
-    //   }
-      
-  
-
+    
     const handleFavourite = (property) => {
         //if wanting to unfavourtie
         if (containsObject(property.id, fav_list)) {
