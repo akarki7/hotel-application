@@ -12,10 +12,9 @@ const Product = () => {
     var userID;
     var token;
 
-    var fav_list = [];
-
     const [db_data, setDbData] = useState([]);
     const [propertyData, setPropertyData] = useState([]);
+    const [fav_list, setFav] = useState([]);
 
     const account = useSelector((state) => state.auth.account);
     if (account) {
@@ -27,39 +26,46 @@ const Product = () => {
         var i;
         for (i = 0; i < list.length; i++) {
             if (list[i] === obj) {
+                console.log(list[i] + "===" + obj);
                 return true;
             }
         }
         return false;
     }
 
+    const getDataDatabase = () => {
+        console.log("Datbase Called");
+        const webApiUrl = `${process.env.REACT_APP_API_URL}/properties/?user_id=${userID}`;
+        const header = new Headers();
+        header.append("Authorization", `Bearer ${token}`);
+        fetch(webApiUrl, { method: 'GET', headers: header })
+            .then(data => data.json())
+            .then(data => {
+                setDbData(data);
+            })
+            .catch((error) => console.error(error));
+    };
+
     useEffect(() => {
-        const getDataDatabase = () => {
-            const webApiUrl = `${process.env.REACT_APP_API_URL}/properties/?user_id=${userID}`;
-            axios
-                .get(webApiUrl, { headers: { "Authorization": `Bearer ${token}` } })
-                .then((res) => {
-                    setDbData(res.data);
-                })
-                .catch((err) => {
-                    console.log(err)
-                });
-        }
         const fetchData = async () => {
             const response = await fetch('https://api.limehome.com/properties/v1/public/properties')
-            const propertyData_received = await response.json()
-            // call database endpoint using /properties/user_id
-            //compare the properties.id from backend to properties.id in frontend and do something for the favourites icon
-            getDataDatabase();
+            const propertyData_received = await response.json();
             setPropertyData(propertyData_received.payload)
         }
-        fetchData()
+        getDataDatabase();
+        fetchData();
     }, [])
 
-    for (var i = 0; i < db_data.length; i++) {
-        fav_list.push(Number(db_data[i].property_id));
-    }
+    useEffect(() => {
+        var len = db_data.length;
+        var temp_list = [];
+        for (var i = 0; i < len; i++) {
+            temp_list.push(Number(db_data[i].property_id));
+        }
+        setFav(temp_list);
+    }, [db_data.length])
 
+  
     const capitalizeName = (str) => {
         const arr = str.split(" ");
         //loop through each element of the array and capitalize the first letter.
@@ -102,7 +108,6 @@ const Product = () => {
         bodyFormData.append('image_url', property.images[0].url);
         bodyFormData.append('users', userID);
 
-
         const webApiUrl = `${process.env.REACT_APP_API_URL}/properties/`;
         axios({
             method: "post",
@@ -110,7 +115,7 @@ const Product = () => {
             data: bodyFormData,
             headers: { "Authorization": `Bearer ${token}` },
         })
-            .then((res) => {
+            .then(() => {
                 console.log("Added to favs");
             })
             .catch((err) => {
@@ -120,21 +125,21 @@ const Product = () => {
 
     const handleFavourite = (property) => {
         //if wanting to unfavourtie
-        console.log("Here");
-        var clicked_property_id = property.id;
-        if (containsObject(clicked_property_id, fav_list)) {
-            fav_list = fav_list.filter(function (item) {
-                return item !== clicked_property_id;
-            })
+        if (containsObject(property.id, fav_list)) {
             //call database delete
             DeleteDataFromDatabase(property);
+            console.log("Deleted " + property.id);
+            getDataDatabase();
+            //window.location.reload(true);
         }
         else //if wanting to make it favourite
         {
-            fav_list.push(clicked_property_id);
             AddDataToDatabase(property);
+            console.log("Added " + property.id);
+            getDataDatabase();
         }
     };
+
     return (
         <>
             <div className="main-container">
