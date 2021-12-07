@@ -25,7 +25,6 @@ const Product = () => {
         var i;
         for (i = 0; i < list.length; i++) {
             if (list[i] === obj) {
-                console.log(list[i] + "===" + obj);
                 return true;
             }
         }
@@ -33,7 +32,6 @@ const Product = () => {
     }
 
     const getDataDatabase = () => {
-        console.log("Datbase Called");
         const webApiUrl = `${process.env.REACT_APP_API_URL}/properties/?user_id=${userID}`;
         const header = new Headers();
         header.append("Authorization", `Bearer ${token}`);
@@ -56,7 +54,6 @@ const Product = () => {
     }, [])
 
     useEffect(() => {
-        console.log("Test effect");
         var len = db_data.length;
         var temp_list = [];
         for (var i = 0; i < len; i++) {
@@ -128,14 +125,12 @@ const Product = () => {
         if (containsObject(property.id, fav_list)) {
             //call database delete
             DeleteDataFromDatabase(property);
-            console.log("Deleted " + property.id);
             getDataDatabase();
             //window.location.reload(true);
         }
         else //if wanting to make it favourite
         {
             AddDataToDatabase(property);
-            console.log("Added " + property.id);
             getDataDatabase();
         }
 
