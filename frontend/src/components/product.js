@@ -15,7 +15,6 @@ const Product = () => {
     const [db_data, setDbData] = useState([]);
     const [propertyData, setPropertyData] = useState([]);
     const [fav_list, setFav] = useState([]);
-
     const account = useSelector((state) => state.auth.account);
     if (account) {
         userID = account.id;
@@ -57,6 +56,7 @@ const Product = () => {
     }, [])
 
     useEffect(() => {
+        console.log("Test effect");
         var len = db_data.length;
         var temp_list = [];
         for (var i = 0; i < len; i++) {
@@ -123,6 +123,13 @@ const Product = () => {
             });
     }
 
+    // function callbackTester(callback) {
+    //     console.log("callback called");
+    //     callback();
+    //   }
+      
+  
+
     const handleFavourite = (property) => {
         //if wanting to unfavourtie
         if (containsObject(property.id, fav_list)) {
@@ -138,6 +145,7 @@ const Product = () => {
             console.log("Added " + property.id);
             getDataDatabase();
         }
+
     };
 
     return (
@@ -158,7 +166,7 @@ const Product = () => {
                                                 </div>
                                                 <div className="fav-icon">
                                                     <IconButton onClick={() => handleFavourite(propertyData)}>
-                                                        <FavoriteIcon style={{ color: containsObject(propertyData.id, fav_list) ? "red" : 'none' }} />
+                                                        <FavoriteIcon style={{ color: containsObject(propertyData.id, fav_list) ? 'red': 'grey'}} />
                                                     </IconButton>
                                                 </div>
                                             </div>
