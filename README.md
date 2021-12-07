@@ -5,7 +5,7 @@ Solution for limehome coding challenge.
 ### Architecture Notes
 ------------------
 * Backend is written in Python and uses Django as the server
-* * For Database the system uses Postgresql for both local testing and production
+* For Database the system uses Postgresql for both local testing and production
 * Frontend is written in React + Typescript
 * The frontend communicates with the backend using REST architecture.
 
@@ -33,6 +33,7 @@ You can go to `localhost:8000` or `0.0.0.0:8000` to access the backend applicati
 ### How to run Frontend
 --------------------------
 Go to the frontend directory and run the following commands:
+(Note: make sure you create an .env file looking at the .env_sample provided)
 
 ```bash
 npm install
@@ -58,7 +59,27 @@ You can access the swagger documentation for api endpoints by going to ```http:/
 ### Features implemented
 --------------------------
 #### Backend
+
+* PostgreSQL as the database
+* Dockerzied the backend 
+* Django server for serving the backend
+* Signup and Login with Token Authentication System
+* Custom user model
+* Propery model to store the users favourite properties to the backend
+* Swagger Documentation for the endpoints
+* Endpoints for creating and receiving properties (user and property have many-many relationship)
+* Filter available to request only the favourite properties of specific user
+* Custom push and put/patch endpoint for the property model to meet out requirements
+* Tests for creation of property, user, login and authentication and filtering
+
 #### Frontend
+
+* Register and Login Page
+* React-Redux for authentication and state management for the entire frontend
+* Product page which displays all the properties from the given public API dynamically
+* The product page also displays the previously favourited properties of that user
+* Allows to favourtie new property or even allows to remove favourite properties
+* Logout functionality for the user to log out and other user to login
 
 ### Folder and File Descriptions: (only the important folders/files are listed)
 --------------------------
@@ -88,7 +109,7 @@ You can access the swagger documentation for api endpoints by going to ```http:/
             ├── signup.component.js
             ├── Navigation.js
             ├── Navigation_logged_in.js
-            ├── product.js
+            ├── product.js (the main page with all the logics and content for displaying the properties)
         ├── routes
             ├──ProtectedRoute.tsx
         ├── store
