@@ -19,7 +19,7 @@ const NavigationLoggedIn= () => {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav >
-                            <Nav.Link href="/"><span className="color-nav-link">Limehome</span></Nav.Link>
+                            <Nav.Link href="/"><span className="color-nav-link">LikeHome</span></Nav.Link>
                             <Button size="lg" className="button-color-logout nav-right-align-2" onClick={handleLogout}>Log Out</Button>
                         </Nav>
                     </Navbar.Collapse>

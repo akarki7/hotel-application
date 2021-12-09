@@ -1,6 +1,5 @@
-# Limehome Coding Challenge
+# Hotel Applicaton
 
-Solution for limehome coding challenge.
 
 ### Architecture Notes
 ------------------
